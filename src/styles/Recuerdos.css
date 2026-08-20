@@ -6,21 +6,33 @@
     --blanco-puro: #ffffff;
 }
 
-body {
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
     margin: 0;
     padding: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
     background-color: var(--rosa-fondo);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--texto-oscuro);
 }
 
+#root {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--rosa-fondo);
+}
+
 .contenedor-principal {
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
     padding: 40px 20px;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
     background: transparent;
 }
 
@@ -40,6 +52,18 @@ body {
     font-size: 1.2rem;
     color: var(--texto-oscuro);
     opacity: 0.8;
+}
+
+.enlace-secreto {
+    color: var(--salmon-principal);
+    text-decoration: none;
+    transition: transform 0.2s ease, text-shadow 0.2s ease;
+    display: inline-block;
+}
+
+.enlace-secreto:hover, .enlace-secreto:active {
+    transform: scale(1.1) rotate(-2deg);
+    text-shadow: 0 0 10px rgba(250, 128, 114, 0.6);
 }
 
 .grupo-fecha {
@@ -81,7 +105,6 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    box-sizing: border-box;
 }
 
 .tarjeta-polaroid:hover {
@@ -145,7 +168,6 @@ body {
 
 .carrusel-item {
     min-width: 100%;
-    box-sizing: border-box;
     padding: 0 10px;
 }
 
@@ -167,4 +189,21 @@ body {
 .indicador.activo {
     background-color: var(--salmon-principal);
     transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .titulo-principal {
+        font-size: 2rem;
+        padding: 0 10px;
+    }
+
+    .subtitulo {
+        font-size: 1.1rem;
+        padding: 0 10px;
+    }
+
+    .etiqueta-fecha h2 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
 }

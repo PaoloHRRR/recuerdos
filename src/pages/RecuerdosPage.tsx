@@ -4,6 +4,7 @@ import { CarruselMovil } from '../components/CarruselMovil';
 import { TarjetaRecuerdo } from '../components/TarjetaRecuerdo';
 import type {GrupoRecuerdos, Recuerdo} from "../interfaces/recuerdos.ts";
 import {useEffect, useState} from "react";
+import { Link } from 'react-router-dom';
 
 export default function RecuerdosPage() {
     const [grupos, setGrupos] = useState<GrupoRecuerdos[]>([]);
@@ -65,7 +66,9 @@ export default function RecuerdosPage() {
         <div className="contenedor-principal">
             <header className="cabecera">
                 <h1 className="titulo-principal">Nuestra Historia de Amor</h1>
-                <p className="subtitulo">Cada día a tu lado es mi recuerdo favorito</p>
+                <p className="subtitulo">
+                    Cada día a tu lado es mi <Link to="/aventura" className="enlace-secreto"><strong>aventura</strong></Link> favorita
+                </p>
             </header>
             <main className="linea-tiempo">
                 {grupos.map((grupo) => (

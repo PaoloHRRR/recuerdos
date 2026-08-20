@@ -1,21 +1,9 @@
 import '../styles/Recuerdos.css';
+import { supabase } from "../supabaseClient.ts";
+import { CarruselMovil } from '../components/CarruselMovil';
+import { TarjetaRecuerdo } from '../components/TarjetaRecuerdo';
+import type {GrupoRecuerdos, Recuerdo} from "../interfaces/recuerdos.ts";
 import {useEffect, useState} from "react";
-import {supabase} from "../supabaseClient.ts";
-import React from 'react';
-
-interface Recuerdo {
-    id: number;
-    titulo: string;
-    descripcion: string;
-    foto_url: string;
-    fecha: string;
-}
-
-interface GrupoRecuerdos {
-    fechaCorta: string;
-    fechaFormateada: string;
-    recuerdos: Recuerdo[];
-}
 
 export default function RecuerdosPage() {
     const [grupos, setGrupos] = useState<GrupoRecuerdos[]>([]);
@@ -98,60 +86,5 @@ export default function RecuerdosPage() {
                 ))}
             </main>
         </div>
-    );
-}
-
-function CarruselMovil({ recuerdos }: { recuerdos: Recuerdo[] }) {
-    const [indiceActual, setIndiceActual] = useState(0);
-    const [touchStart, setTouchStart] = useState(0);
-    const [touchEnd, setTouchEnd] = useState(0);
-
-    const handleTouchStart = (e: React.TouchEvent) => setTouchStart(e.targetTouches[0].clientX);
-    const handleTouchMove = (e: React.TouchEvent) => setTouchEnd(e.targetTouches[0].clientX);
-    const handleTouchEnd = () => {
-        if (!touchStart || !touchEnd) return;
-        const distancia = touchStart - touchEnd;
-        const umbral = 50;
-        if (distancia > umbral) {
-            setIndiceActual((prev) => (prev + 1) % recuerdos.length);
-        }
-        if (distancia < -umbral) {
-            setIndiceActual((prev) => (prev - 1 + recuerdos.length) % recuerdos.length);
-        }
-        setTouchStart(0);
-        setTouchEnd(0);
-    };
-
-    return (
-        <div className="carrusel-movil" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-            <div className="carrusel-interno" style={{ transform: `translateX(-${indiceActual * 100}%)` }}>
-                {recuerdos.map((recuerdo) => (
-                    <div className="carrusel-item" key={recuerdo.id}>
-                        <TarjetaRecuerdo recuerdo={recuerdo} />
-                    </div>
-                ))}
-            </div>
-            {recuerdos.length > 1 && (
-                <div className="carrusel-indicadores">
-                    {recuerdos.map((_, idx) => (
-                        <div key={idx} className={`indicador ${idx === indiceActual ? 'activo' : ''}`} />
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-}
-
-function TarjetaRecuerdo({ recuerdo }: { recuerdo: Recuerdo }) {
-    return (
-        <article className="tarjeta-polaroid">
-            <div className="marco-foto">
-                <img src={recuerdo.foto_url} alt={recuerdo.titulo} loading="lazy" />
-            </div>
-            <div className="contenido-texto">
-                <h3>{recuerdo.titulo}</h3>
-                <p>{recuerdo.descripcion}</p>
-            </div>
-        </article>
     );
 }

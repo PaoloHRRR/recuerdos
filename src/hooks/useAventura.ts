@@ -6,7 +6,7 @@ export const TAMANO_CASILLA = 64;
 
 export const useAventura = () => {
     const [dimensiones, setDimensiones] = useState({ col: 15, fil: 10 });
-    const [tiempo, setTiempo] = useState<number>(60);
+    const [tiempo, setTiempo] = useState<number>(30);
     const [puntuacion, setPuntuacion] = useState<number>(0);
     const [jugando, setJugando] = useState<boolean>(true);
     const [recuerdoDesbloqueado, setRecuerdoDesbloqueado] = useState<any>(null);
@@ -65,7 +65,7 @@ export const useAventura = () => {
     };
 
     const reiniciarJuego = () => {
-        setTiempo(60);
+        setTiempo(30);
         setPuntuacion(0);
         setElementos([]);
         setRecuerdoDesbloqueado(null);

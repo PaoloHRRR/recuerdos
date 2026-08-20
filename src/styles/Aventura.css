@@ -1,0 +1,231 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.contenedor-juego {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1a1a1a;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+}
+
+.marcador {
+    display: flex;
+    gap: 40px;
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+    padding: 15px 40px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 0 0 20px 20px;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+}
+
+.escenario {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/fondo.jpg');
+    background-size: 100% 100%;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.tablero {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.jugador {
+    width: 64px;
+    height: 96px;
+    background-image: url('/sprites/mari-sprite.png');
+    background-repeat: no-repeat;
+    position: absolute;
+    transition: top 0.2s linear, left 0.2s linear;
+    z-index: 10;
+}
+
+.jugador.reposo {
+    background-position: 0 0;
+    animation: mari-idle 1s steps(2) infinite;
+}
+
+.jugador.corre-derecha {
+    background-position: 0 -96px;
+    animation: mari-run-x 0.7s steps(7) infinite;
+}
+
+.jugador.corre-izquierda {
+    background-position: 0 -192px;
+    animation: mari-run-x 0.7s steps(7) infinite;
+}
+
+.jugador.derrotada {
+    background-position: 0 -288px;
+}
+
+.gato {
+    position: absolute;
+    background-image: url('/sprites/gato-sprite.png');
+    background-repeat: no-repeat;
+    z-index: 5;
+    transform: scale(0.6) translate(-10px, -20px);
+    transform-origin: top left;
+    transition: left 0.5s linear;
+}
+
+.gato.corre-derecha {
+    width: 128px;
+    height: 96px;
+    background-position: 0 -96px;
+    animation: gato-run 0.8s steps(8) infinite;
+}
+
+.gato.corre-izquierda {
+    width: 128px;
+    height: 96px;
+    background-position: 0 -192px;
+    animation: gato-run 0.8s steps(8) infinite;
+}
+
+.peonia {
+    width: 32px;
+    height: 32px;
+    background-image: url('/sprites/peonia-sprite.png');
+    background-size: contain;
+    position: absolute;
+    transform: translate(16px, 16px);
+}
+
+.coca-cola {
+    width: 32px;
+    height: 60px;
+    background-image: url('/sprites/coke-sprite.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    transform: translate(16px, 2px);
+}
+
+@keyframes mari-run-x {
+    from { background-position-x: 0px; }
+    to { background-position-x: -448px; }
+}
+
+@keyframes mari-idle {
+    from { background-position-x: 0px; }
+    to { background-position-x: -128px; }
+}
+
+@keyframes gato-run {
+    from { background-position-x: 0px; }
+    to { background-position-x: -1024px; }
+}
+
+.pantalla-final {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff0f5;
+    color: #5a4b4b;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 90%;
+    max-width: 450px;
+    border: 3px solid #ffb6c1;
+}
+
+.pantalla-final h2 {
+    margin: 0;
+    color: #fa8072;
+    font-family: 'Georgia', serif;
+    font-size: 1.8rem;
+}
+
+.pantalla-final p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.recuerdo-desbloqueado {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(250, 128, 114, 0.15);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.recuerdo-desbloqueado img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.recuerdo-desbloqueado h3 {
+    margin: 0 0 5px 0;
+    color: #fa8072;
+    font-size: 1.3rem;
+}
+
+.recuerdo-desbloqueado p {
+    font-size: 0.95rem;
+    font-weight: normal;
+    color: #777;
+    line-height: 1.4;
+}
+
+.botones-finales {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+.botones-finales button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 1rem;
+}
+
+.botones-finales button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.botones-finales button:first-child {
+    background: #fa8072;
+    color: white;
+}
+
+.botones-finales button:last-child {
+    background: #ffb6c1;
+    color: #5a4b4b;
+}

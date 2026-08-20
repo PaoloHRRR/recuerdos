@@ -106,14 +106,6 @@ function CarruselMovil({ recuerdos }: { recuerdos: Recuerdo[] }) {
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
 
-    useEffect(() => {
-        if (recuerdos.length <= 1) return;
-        const intervalo = setInterval(() => {
-            setIndiceActual((prev) => (prev + 1) % recuerdos.length);
-        }, 8000);
-        return () => clearInterval(intervalo);
-    }, [recuerdos.length]);
-
     const handleTouchStart = (e: React.TouchEvent) => setTouchStart(e.targetTouches[0].clientX);
     const handleTouchMove = (e: React.TouchEvent) => setTouchEnd(e.targetTouches[0].clientX);
     const handleTouchEnd = () => {

@@ -8,6 +8,7 @@
 
 body {
     margin: 0;
+    padding: 0;
     background-color: var(--rosa-fondo);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--texto-oscuro);
@@ -17,6 +18,10 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     padding: 40px 20px;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent;
 }
 
 .cabecera {
@@ -75,6 +80,8 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .tarjeta-polaroid:hover {
@@ -99,6 +106,7 @@ body {
 .contenido-texto {
     margin-top: 20px;
     text-align: center;
+    flex-grow: 1;
 }
 
 .contenido-texto h3 {
@@ -114,7 +122,6 @@ body {
     color: #777;
 }
 
-/* Pantalla de carga */
 .pantalla-carga {
     height: 100vh;
     display: flex;
@@ -122,4 +129,42 @@ body {
     align-items: center;
     font-size: 1.5rem;
     color: var(--salmon-principal);
+}
+
+.carrusel-movil {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    padding: 10px 0;
+}
+
+.carrusel-interno {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carrusel-item {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+.carrusel-indicadores {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.indicador {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--rosa-acento);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.indicador.activo {
+    background-color: var(--salmon-principal);
+    transform: scale(1.2);
 }

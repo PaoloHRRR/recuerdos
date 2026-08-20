@@ -1,9 +1,9 @@
-import Recuerdos from "./pages/recuerdos.tsx";
+import RecuerdosPage from "./pages/RecuerdosPage.tsx";
 
 function App() {
   return (
       <div className="App">
-        <Recuerdos />
+        <RecuerdosPage />
       </div>
   );
 }
